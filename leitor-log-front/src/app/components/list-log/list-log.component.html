@@ -1,0 +1,101 @@
+<div class="row">
+    <div class="col-12 mt-5 ">
+        <button class="btn btn-primary" routerLink='/form-log'>
+            CADASTRAR
+        </button>
+
+    </div>
+    <form [formGroup]="form" class="col-12 mt-5" (submit)="search(page)">
+        <div class="row">
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="ip">IP:</label>
+                    <input formControlName="ip" id="ip" class="form-control">
+                </div>
+            </div>
+
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="userAgent">User Agent:</label>
+                    <input id="userAgent" formControlName="userAgent" class="form-control">
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="startDate">Data Início:</label>
+                            <input type="datetime-local" formControlName="startDate" placeholder="dd/mm/aaaa hh:mm"
+                                class="form-control" />
+                        </div>
+
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="endDate">Data Fim:</label>
+                            <input type="datetime-local" id="endDate" placeholder="dd/mm/aaaa hh:mm"
+                                formControlName="endDate" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="status">Status:</label>
+                            <input id="status" formControlName="status" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-12 d-flex justify-content-center">
+                <button class="btn btn-primary mx-auto mt-2">PESQUISAR</button>
+            </div>
+        </div>
+
+
+
+
+    </form>
+
+
+
+    <div class="col-12">
+
+        <table class="table mt-3 table-hover table-striped table-bordered border-primary">
+            <thead class="table-dark">
+                <tr>
+                    <td>IP</td>
+                    <td>Status</td>
+                    <td>User Agent</td>
+                    <td>Data</td>
+                    <td>Editar</td>
+                    <td>Excluir</td>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr *ngFor="let log of logs">
+                    <td>{{log.ip}}</td>
+                    <td>{{log.status}}</td>
+                    <td>{{log.userAgent}}</td>
+                    <td>{{log.data | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                    <td>
+                        <button class="btn btn-link" [routerLink]="['/form-log',log.id]">editar </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-link" (click)="delete(log.id)">excluir </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+    <div *ngIf="totalElements>0" class="col-12 d-flex justify-content-center">
+        <ngb-pagination [collectionSize]="totalElements" (pageChange)="changePage($event)" maxSize="10"
+            [pageSize]="pageSize" [(page)]="page" aria-label="Default pagination"></ngb-pagination>
+    </div>
+</div>

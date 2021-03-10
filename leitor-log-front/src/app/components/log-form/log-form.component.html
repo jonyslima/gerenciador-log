@@ -1,0 +1,65 @@
+<div class="row mt-5">
+
+    <div *ngIf="showMessage" class="col-12">
+        <div class="row">
+            <div class="col-6">
+                <ngb-alert  animation="true" [type]="typeMessage" (closed)="close()" dismissible="true">
+                   {{message}}
+                </ngb-alert>
+            </div>
+        </div>
+    </div>
+
+    <form [formGroup]="form" (submit)="save()" class="col-6">
+        <div class="row">
+
+            <div class="form-group col-12">
+                <label for="">IP:</label>
+                <input formControlName="ip" type="text" class="form-control">
+                <div class="invalid-feedback" [class.d-block]="showErro('required',controls.ip)">
+                    O campo IP é obrigatório
+                </div>
+                <div class="invalid-feedback" [class.d-block]="showErro('pattern',controls.ip)">
+                    O campo IP é inválido
+                </div>
+            </div>
+            <div class="form-group col-12">
+                <label for="">Status:</label>
+                <input formControlName="status" type="text" class="form-control">
+                <div class="invalid-feedback" [class.d-block]="showErro('required',controls.status)">
+                    O campo status é obrigatório
+                </div>
+                <div class="invalid-feedback" [class.d-block]="showErro('min',controls.status)">
+                    O status deve ser maior que ou igual à {{controls.status.errors?.min?.min}}
+                </div>
+                <div class="invalid-feedback" [class.d-block]="showErro('max',controls.status)">
+                    O status deve ser menor que ou igual à {{controls.status.errors?.max?.max}}
+                </div>
+            </div>
+            <div class="form-group col-12">
+                <label for="">Data:</label>
+                <input formControlName="data" placeholder="aaaa-mm-dd hh:mm:ss.SSS" type="text" class="form-control">
+                <div class="invalid-feedback" [class.d-block]="showErro('required',controls.data)">
+                    O campo data é obrigatório
+                </div>
+                <div class="invalid-feedback" [class.d-block]="showErro('pattern',controls.data)">
+                    O formato da data deve ser aaaa-mm-dd hh:mm:ss.SSS
+                </div>
+            </div>
+            <div class="form-group col-12">
+                <label for="">User Agent:</label>
+                <input formControlName="userAgent" type="text" class="form-control">
+                <div class="invalid-feedback" [class.d-block]="showErro('required',controls.userAgent)">
+                    O campo user agent é obrigatório
+                </div>
+            </div>
+        </div>
+
+
+        <button class="btn btn-primary mt-2" [disabled]="form.invalid">
+            SALVAR
+        </button>
+    </form>
+
+
+</div>

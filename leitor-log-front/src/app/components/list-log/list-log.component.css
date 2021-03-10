@@ -1,0 +1,4 @@
+ :host ::ng-deep ngb-pagination .page-item.active .sr-only {
+    display: none;
+
+}

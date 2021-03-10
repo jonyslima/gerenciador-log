@@ -1,0 +1,32 @@
+<div class="row mt-5">
+    <div *ngIf="showMessage" class="col-12">
+        <div class="row">
+            <div class="col-6">
+                <ngb-alert animation="true" [type]="typeMessage" (closed)="close()" dismissible="true">
+                    {{message}}
+                </ngb-alert>
+            </div>
+        </div>
+    </div>
+
+    <form class="col-12" (submit)="send()">
+
+        <input class="form-control" (change)="handleFileInput($event.target.files)" type="file">
+
+        <button class="btn btn-primary mt-2">
+            <ng-container *ngIf="sending">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Enviando..
+            </ng-container>
+            <ng-container *ngIf="!sending">
+                Enviar
+            </ng-container>
+        </button>
+    </form>
+
+
+</div>
+
+<div class="chart-wrapper">
+
+</div>
